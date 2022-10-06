@@ -113,3 +113,19 @@ A brief description of the data:
 
 - Some examples of key variables: `dumpster` shows the ID of the trash; `month`, `year`, `date` variables represent the time when the trash was collected. `weight_tons` and `volume_cubic_yards` represent the mass and volume of the trash; `plastic_bottle`, `polystyrene`, `cigarette_butt`, `glass_bottle`, `grocery_bag`, `chip_bag` and `sport_ball` shows the amount of different kinds of trash in every dumpster. `homes_poewred` represents how many homes the dumpster powered; and `trash_wheel_type` indicates whether it's collected by Mr. Trash Wheel or Professor Trash Wheel.
 
+Quantitative analysis of the variables.
+
+```{r}
+prof_trash_sum <- merge_trash %>% 
+  filter(trash_wheel_type == "Professor Trash Wheel") %>% 
+  select(weight_tons) %>% 
+  sum()
+prof_trash_sum
+mr_spor_2020_sum <- merge_trash %>% 
+  filter(trash_wheel_type == "Mr Trash Wheel", year == "2020") %>% 
+  select(sports_balls) %>% 
+  sum()
+mr_spor_2020_sum
+```
+
+- The total weight of trash collected by Professor Trash Wheel is 190.12 tonnes and the total number of sports balls collected by Mr. Trash Wheel in 2020 is 856.
