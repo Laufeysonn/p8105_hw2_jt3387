@@ -7,3 +7,15 @@ output: github_document
 library(tidyverse)
 library(readxl)
 ```
+
+## Problem 1
+
+Read and clean the New York transit subway data.
+
+```{r}
+nyc_transit <- read_csv("data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv",
+                        col_types = cols(Route8 = "c", Route9 = "c", Route10 = "c", Route11 = "c")) %>% 
+  janitor::clean_names() %>% 
+  select(line:ada, -c(exit_only, staffing, staff_hours)) %>% 
+  mutate(entry = recode(entry, "YES" = TRUE, "NO" = FALSE))
+```
