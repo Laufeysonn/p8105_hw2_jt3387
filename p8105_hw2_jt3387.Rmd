@@ -134,7 +134,7 @@ mr_spor_2020_sum
 
 Read and clean the pols-month data.
 
-```{r}
+```{r, message = FALSE}
 pols <- read_csv("data/fivethirtyeight_datasets/pols-month.csv") %>% 
   janitor::clean_names() %>% 
   separate(mon, c("year", "month", "day"), sep = '-') %>% 
@@ -143,4 +143,22 @@ pols <- read_csv("data/fivethirtyeight_datasets/pols-month.csv") %>%
          president = recode(prez_dem, `0` = "gop", `1` = "dem")) %>% 
   select(-c(prez_dem, prez_gop, day)) %>% 
   relocate(year, month, president)
+```
+
+Read and clean the snp and unemployment data.
+
+```{r, message = FALSE}
+snp <- read_csv("data/fivethirtyeight_datasets/snp.csv") %>% 
+  separate(date, into = c("month", "day", "year"), sep = "/") %>% 
+  mutate(year = as.integer(year),
+         month = month.name[as.integer(month)],
+         year_pref = ifelse(year < 50, 2000, 1900), 
+         year = year_pref + year) %>% 
+  select(year, month, close) %>% 
+  arrange(year, month)
+unemployment <- read_csv("data/fivethirtyeight_datasets/unemployment.csv") %>%
+  janitor::clean_names() %>% 
+  pivot_longer(jan:dec,
+               names_to = "month",
+               values_to = "number_umemploy")
 ```
