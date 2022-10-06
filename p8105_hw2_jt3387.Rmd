@@ -19,3 +19,11 @@ nyc_transit <- read_csv("data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv",
   select(line:ada, -c(exit_only, staffing, staff_hours)) %>% 
   mutate(entry = recode(entry, "YES" = TRUE, "NO" = FALSE))
 ```
+
+A brief description of the data:
+  
+- The resulting dataset contains ``r nrow(nyc_transit)`` rows and ``r ncol(nyc_transit)`` columns. The dataset contains the following variables: *line*, *station_name*, *station_latitude*, *station_longitude*, *route1* to *route11*, *entrance_type*, *entry*, *vending*, and *ada*. 
+
+- The data cleaning steps: I firstly read the dataset using `read_csv`, and clean the names with `clean_name` function. Then I use `select` to choose the variables I need, after that I convert the entry variable from character (YES and NO) to a logical variable(TRUE and FALSE) using `recode`.
+
+- I think these datas are not tidy, as the route information can still be integrated and simplified and other variables like `entry` and `vending` with values of Yes and No can also be converted to logical variables.
