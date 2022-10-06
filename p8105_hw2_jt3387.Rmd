@@ -27,3 +27,22 @@ A brief description of the data:
 - The data cleaning steps: I firstly read the dataset using `read_csv`, and clean the names with `clean_name` function. Then I use `select` to choose the variables I need, after that I convert the entry variable from character (YES and NO) to a logical variable(TRUE and FALSE) using `recode`.
 
 - I think these datas are not tidy, as the route information can still be integrated and simplified and other variables like `entry` and `vending` with values of Yes and No can also be converted to logical variables.
+
+Quantitative analysis of the variables.
+
+```{r}
+dis_station <- nyc_transit %>% 
+  distinct(station_name, line)
+nrow(dis_station)
+```
+
+- There are 465 distinct stations.
+
+```{r}
+dis_station_ada <- nyc_transit %>%
+  filter(ada == TRUE) %>% 
+  distinct(station_name, line)
+nrow(dis_station_ada)
+```
+
+- 84 stations are ADA compliant.
