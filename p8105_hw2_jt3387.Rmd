@@ -80,6 +80,7 @@ mr_trash <- read_excel("data/Trash Wheel Collection Data.xlsx",
   drop_na(dumpster) %>% 
   mutate(sports_balls = as.integer(round(sports_balls, digits = 0)),
          year = as.numeric(year)) 
+
 prof_trash <- read_excel("data/Trash Wheel Collection Data.xlsx", 
                          sheet ="Professor Trash Wheel", range = "A2:M97") %>%
   janitor::clean_names() %>% 
@@ -109,6 +110,7 @@ prof_trash_sum <- merge_trash %>%
   select(weight_tons) %>% 
   sum()
 prof_trash_sum
+
 mr_spor_2020_sum <- merge_trash %>% 
   filter(trash_wheel_type == "Mr Trash Wheel", year == "2020") %>% 
   select(sports_balls) %>% 
