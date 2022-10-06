@@ -14,7 +14,7 @@ Read and clean the New York transit subway data.
 
 ```{r}
 nyc_transit <- read_csv("data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv",
-                        col_types = cols(Route8 = "c", Route9 = "c", Route10 = "c", Route11 = "c")) %>% 
+                        col_types = cols(Route8 = "c", Route9 = "c", Route10 = "c", Route11 = "c")) %>%
   janitor::clean_names() %>% 
   select(line:ada, -c(exit_only, staffing, staff_hours)) %>% 
   mutate(entry = recode(entry, "YES" = TRUE, "NO" = FALSE))
@@ -40,7 +40,7 @@ dis_station_ada <- nyc_transit %>%
   distinct(station_name, line)
 nrow(dis_station_ada)
 
-nyc_transit_entry = nyc_transit %>% 
+nyc_transit_entry <- nyc_transit %>% 
   filter(vending == "NO") %>% 
   pull(entry)
 mean(nyc_transit_entry)
@@ -74,20 +74,20 @@ Read and clean the Mr. Trash Wheel sheet and Professor Trash Wheel data.
 
 ```{r}
 mr_trash <- read_excel("data/Trash Wheel Collection Data.xlsx", 
-                       sheet ="Mr. Trash Wheel", range = "A2:N550") %>%
+                       sheet = "Mr. Trash Wheel", range = "A2:N550") %>%
   janitor::clean_names() %>% 
   drop_na(dumpster) %>% 
   mutate(sports_balls = as.integer(round(sports_balls, digits = 0)),
          year = as.numeric(year)) 
 
 prof_trash <- read_excel("data/Trash Wheel Collection Data.xlsx", 
-                         sheet ="Professor Trash Wheel", range = "A2:M97") %>%
+                         sheet = "Professor Trash Wheel", range = "A2:M97") %>%
   janitor::clean_names() %>% 
   drop_na(dumpster) %>% 
   mutate(year = as.numeric(year)) 
 ```
 
-Add an additional variable `trash_wheel_type` to both data set and combine them.
+Add an additional variable *trash_wheel_type* to both data set and combine them.
 
 ```{r, message = FALSE}
 mr_trash <- mutate(mr_trash, trash_wheel_type = "Mr Trash Wheel")
@@ -99,7 +99,7 @@ A brief description of the data:
   
 - There are `r ncol(merge_trash)` variables and `r nrow(merge_trash)` observations.
 
-- Some examples of key variables: *dumpster* shows the ID of the trash; *month*, *year*, *date* variables represent the time when the trash was collected. *weight_tons* and *volume_cubic_yards* represent the mass and volume of the trash; *plastic_bottle*, *polystyrene*, *cigarette_butt*, *glass_bottle*, *grocery_bag*, *chip_bag* and *sport_ball* shows the amount of different kinds of trash in every dumpster. *homes_powered* represents how many homes the dumpster powered; and `trash_wheel_type` indicates whether it's collected by Mr. Trash Wheel or Professor Trash Wheel.
+- Some examples of key variables: *dumpster* shows the ID of the trash; *month*, *year*, *date* variables represent the time when the trash was collected. *weight_tons* and *volume_cubic_yards* represent the mass and volume of the trash; *plastic_bottle*, *polystyrene*, *cigarette_butt*, *glass_bottle*, *grocery_bag*, *chip_bag* and *sport_ball* shows the amount of different kinds of trash in every dumpster. *homes_powered* represents how many homes the dumpster powered; and *trash_wheel_type* indicates whether it's collected by Mr. Trash Wheel or Professor Trash Wheel.
 
 Quantitative analysis of the variables.
 
@@ -150,7 +150,7 @@ unemployment <- read_csv("data/fivethirtyeight_datasets/unemployment.csv") %>%
   janitor::clean_names() %>% 
   pivot_longer(jan:dec,
                names_to = "month",
-               values_to = "number_umemploy")
+               values_to = "umemploy_number")
 ```
 
 Merge three data sets.
