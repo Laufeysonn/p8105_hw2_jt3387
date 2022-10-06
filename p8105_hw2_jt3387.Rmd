@@ -106,3 +106,10 @@ mr_trash = mr_trash %>% mutate(trash_wheel_type = "Mr Trash Wheel")
 prof_trash = prof_trash %>% mutate(trash_wheel_type = "Professor Trash Wheel")
 merge_trash = full_join(mr_trash, prof_trash)
 ```
+
+A brief description of the data:
+  
+- There are `r ncol(merge_trash)` variables and `r nrow(merge_trash)` observations.
+
+- Some examples of key variables: `dumpster` shows the ID of the trash; `month`, `year`, `date` variables represent the time when the trash was collected. `weight_tons` and `volume_cubic_yards` represent the mass and volume of the trash; `plastic_bottle`, `polystyrene`, `cigarette_butt`, `glass_bottle`, `grocery_bag`, `chip_bag` and `sport_ball` shows the amount of different kinds of trash in every dumpster. `homes_poewred` represents how many homes the dumpster powered; and `trash_wheel_type` indicates whether it's collected by Mr. Trash Wheel or Professor Trash Wheel.
+
