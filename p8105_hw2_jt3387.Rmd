@@ -62,8 +62,7 @@ nyc_transit_A <- nyc_transit %>%
   distinct(station_name, line, .keep_all = TRUE)
 nrow(nyc_transit_A)
 
-nyc_transit_A_ada <- nyc_transit_A %>% 
-  filter(ada == TRUE)
+nyc_transit_A_ada <- filter(nyc_transit_A, ada == TRUE)
 nrow(nyc_transit_A_ada)
 ```
 
